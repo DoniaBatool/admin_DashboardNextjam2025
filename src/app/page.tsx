@@ -12,14 +12,11 @@ import {
   FaWarehouse,
 } from "react-icons/fa";
 
-
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("orders");
 
   return (
-    
     <div className="flex min-h-screen bg-gray-100">
-     
       {/* Sidebar */}
       <div className="w-64 h-screen bg-[#2A254B] text-white flex-shrink-0">
         <div className="px-4 py-8 text-center">
@@ -126,7 +123,6 @@ const AdminDashboard = () => {
               <h2 className="text-xl font-semibold mb-2">New Orders</h2>
               <p>5 new orders to review</p>
             </div>
-            {/* Add more cards for detailed order analytics */}
           </div>
         )}
 
@@ -151,11 +147,10 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {/* Other tabs */}
         {activeTab === "feedbacks" && (
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-2">Feedbacks</h2>
-            <p>Latest Feedback: "Great product, very satisfied!"</p>
+            <p>Latest Feedback: &quot;Great product, very satisfied!&quot;</p>
             <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md">
               View All Feedbacks
             </button>
@@ -166,7 +161,7 @@ const AdminDashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-2">Reviews & Ratings</h2>
             <p>Average Rating: 4.7/5</p>
-            <p>Top Review: "Excellent customer service!"</p>
+            <p>Top Review: &quot;Excellent customer service!&quot;</p>
             <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md">
               View All Reviews
             </button>
