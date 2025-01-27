@@ -1,101 +1,214 @@
-import Image from "next/image";
+'use client';
+import { useState } from "react";
+import Link from "next/link";
+import { IoMdAnalytics } from "react-icons/io";
+import {
+  FaBoxOpen,
+  FaUsers,
+  FaMailBulk,
+  FaComments,
+  FaStar,
+  FaShippingFast,
+  FaWarehouse,
+} from "react-icons/fa";
 
-export default function Home() {
+
+const AdminDashboard = () => {
+  const [activeTab, setActiveTab] = useState<string>("orders");
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    
+    <div className="flex min-h-screen bg-gray-100">
+     
+      {/* Sidebar */}
+      <div className="w-64 h-screen bg-[#2A254B] text-white flex-shrink-0">
+        <div className="px-4 py-8 text-center">
+          <h2 className="text-2xl font-bold">Admin Panel</h2>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <nav className="flex flex-col space-y-4 px-4 py-6">
+          <Link
+            href="#"
+            onClick={() => setActiveTab("orders")}
+            className={`flex items-center space-x-2 text-lg cursor-pointer ${
+              activeTab === "orders" ? "text-blue-400" : ""
+            }`}
+          >
+            <FaBoxOpen size={20} />
+            <span>Orders</span>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveTab("users")}
+            className={`flex items-center space-x-2 text-lg cursor-pointer ${
+              activeTab === "users" ? "text-blue-400" : ""
+            }`}
+          >
+            <FaUsers size={20} />
+            <span>Users</span>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveTab("mailingList")}
+            className={`flex items-center space-x-2 text-lg cursor-pointer ${
+              activeTab === "mailingList" ? "text-blue-400" : ""
+            }`}
+          >
+            <FaMailBulk size={20} />
+            <span>Mailing List</span>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveTab("feedbacks")}
+            className={`flex items-center space-x-2 text-lg cursor-pointer ${
+              activeTab === "feedbacks" ? "text-blue-400" : ""
+            }`}
+          >
+            <FaComments size={20} />
+            <span>Feedbacks</span>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveTab("reviews")}
+            className={`flex items-center space-x-2 text-lg cursor-pointer ${
+              activeTab === "reviews" ? "text-blue-400" : ""
+            }`}
+          >
+            <FaStar size={20} />
+            <span>Reviews & Ratings</span>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveTab("analytics")}
+            className={`flex items-center space-x-2 text-lg cursor-pointer ${
+              activeTab === "analytics" ? "text-blue-400" : ""
+            }`}
+          >
+            <IoMdAnalytics size={20} />
+            <span>Analytics</span>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveTab("inventory")}
+            className={`flex items-center space-x-2 text-lg cursor-pointer ${
+              activeTab === "inventory" ? "text-blue-400" : ""
+            }`}
+          >
+            <FaWarehouse size={20} />
+            <span>Inventory</span>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveTab("shipment")}
+            className={`flex items-center space-x-2 text-lg cursor-pointer ${
+              activeTab === "shipment" ? "text-blue-400" : ""
+            }`}
+          >
+            <FaShippingFast size={20} />
+            <span>Shipment</span>
+          </Link>
+        </nav>
+      </div>
+
+      {/* Main content area */}
+      <div className="flex-grow p-8">
+        <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+
+        {/* Dynamic content based on the selected tab */}
+        {activeTab === "orders" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-semibold mb-2">Orders</h2>
+              <p>Total Orders: 150</p>
+              <p>Pending: 10</p>
+              <p>Shipped: 100</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-semibold mb-2">New Orders</h2>
+              <p>5 new orders to review</p>
+            </div>
+            {/* Add more cards for detailed order analytics */}
+          </div>
+        )}
+
+        {activeTab === "users" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-semibold mb-2">Users</h2>
+              <p>Total Users: 2000</p>
+              <p>Active: 1800</p>
+              <p>Inactive: 200</p>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "mailingList" && (
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Mailing List</h2>
+            <p>Total Subscribers: 1200</p>
+            <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md">
+              Send Newsletter
+            </button>
+          </div>
+        )}
+
+        {/* Other tabs */}
+        {activeTab === "feedbacks" && (
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Feedbacks</h2>
+            <p>Latest Feedback: "Great product, very satisfied!"</p>
+            <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md">
+              View All Feedbacks
+            </button>
+          </div>
+        )}
+
+        {activeTab === "reviews" && (
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Reviews & Ratings</h2>
+            <p>Average Rating: 4.7/5</p>
+            <p>Top Review: "Excellent customer service!"</p>
+            <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md">
+              View All Reviews
+            </button>
+          </div>
+        )}
+
+        {activeTab === "analytics" && (
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Analytics</h2>
+            <p>Monthly Revenue: $10,000</p>
+            <p>Total Visitors: 5000</p>
+            <p>Conversion Rate: 2.5%</p>
+            <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md">
+              View Analytics
+            </button>
+          </div>
+        )}
+
+        {activeTab === "inventory" && (
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Inventory</h2>
+            <p>Products in Stock: 500</p>
+            <p>Low Stock: 20</p>
+            <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md">
+              Manage Inventory
+            </button>
+          </div>
+        )}
+
+        {activeTab === "shipment" && (
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Shipment</h2>
+            <p>Pending Shipments: 15</p>
+            <p>Shipped: 50</p>
+            <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md">
+              View Shipments
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
-}
+};
+
+export default AdminDashboard;
