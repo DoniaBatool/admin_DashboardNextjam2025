@@ -9,7 +9,7 @@ const HeroSection = () => {
         <p className="text-xl mb-6">Explore our curated collection of handcrafted furniture designed to fit your unique style.</p>
         <Link href="/login">
           <button className="bg-blue-950 text-white px-6 py-3 rounded-lg text-lg hover:bg-slate-700">
-            Sign Up / Login
+             Login
           </button>
         </Link>
       </div>

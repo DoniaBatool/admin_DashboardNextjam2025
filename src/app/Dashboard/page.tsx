@@ -1,20 +1,39 @@
-'use client'; 
-import { useState } from "react"; 
-import Link from "next/link"; 
-import { IoMdAnalytics } from "react-icons/io"; 
-import { FaBoxOpen, FaUsers, FaMailBulk, FaComments, FaStar, FaShippingFast, FaWarehouse, FaBoxes } from "react-icons/fa"; // Added FaBoxes
-import Orders from "../components/Orders"; 
-import Customers from "../components/Customer"; 
-import Products from "../components/Product"; 
-import MailingList from "../components/MailingList"; 
-import FeedbackComponent from "../components/FeedbackComponent"; 
-import Reviews from "../components/Reviews"; 
-import Analytics from "../components/Analytics"; 
+"use client";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { IoMdAnalytics } from "react-icons/io";
+import { FaBoxOpen, FaUsers, FaMailBulk, FaComments, FaStar, FaShippingFast, FaWarehouse, FaBoxes } from "react-icons/fa"; 
+import Orders from "../components/Orders";
+import Customers from "../components/Customer";
+import Products from "../components/Product";
+import MailingList from "../components/MailingList";
+import FeedbackComponent from "../components/FeedbackComponent";
+import Reviews from "../components/Reviews";
+import Analytics from "../components/Analytics";
 import CategoryList from "../components/Category";
+import { User } from "@supabase/supabase-js"; // ✅ Import User type from Supabase
 
+const AdminDashboard = () => {
+  const [user, setUser] = useState<User | null>(null); // ✅ Properly typed
+  const [activeTab, setActiveTab] = useState<string>("orders"); // ✅ Explicit string type
+  const router = useRouter();
 
-const AdminDashboard = () => { 
-  const [activeTab, setActiveTab] = useState<string>("orders");
+  useEffect(() => {
+    const checkUser = async (): Promise<void> => {
+      const { data } = await supabase.auth.getUser();
+      if (!data.user) {
+        router.push("/login"); // ✅ Redirect to login if not authenticated
+      } else {
+        setUser(data.user);
+      }
+    };
+
+    checkUser();
+  }, [router]);
+
+  if (!user) return <p className="text-center text-xl font-semibold">Loading...</p>;
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -22,6 +41,7 @@ const AdminDashboard = () => {
       <div className="w-64 h-screen bg-[#2A254B] text-white flex-shrink-0">
         <div className="px-4 py-8 text-center">
           <h2 className="text-2xl font-bold">Admin Panel</h2>
+          <p className="text-sm mt-2">Logged in as: {user.email}</p> {/* ✅ Show logged-in admin email */}
         </div>
         <nav className="flex flex-col space-y-4 px-4 py-6">
           {/* Sidebar links */}
@@ -57,7 +77,6 @@ const AdminDashboard = () => {
             <FaShippingFast size={20} />
             <span>Shipment</span>
           </Link>
-          {/* Category Menu Link */}
           <Link href="#" onClick={() => setActiveTab("category")} className={`flex items-center space-x-2 text-lg cursor-pointer ${activeTab === "category" ? "text-blue-400" : ""}`}>
             <FaBoxes size={20} />
             <span>Category</span>
@@ -72,16 +91,15 @@ const AdminDashboard = () => {
         {/* Dynamic content based on the selected tab */}
         {activeTab === "orders" && <Orders />}
         {activeTab === "users" && <Customers />}
-        {activeTab === "inventory" && <Products />} {/* Render Products here */}
-        {activeTab === "mailingList" && <MailingList />} 
-        {activeTab === "feedbacks" && <FeedbackComponent />} 
-        {activeTab === "reviews" && <Reviews />} 
-        {activeTab === "analytics" && <Analytics />} 
-        {activeTab === "category" && <CategoryList />} 
-       
+        {activeTab === "inventory" && <Products />}
+        {activeTab === "mailingList" && <MailingList />}
+        {activeTab === "feedbacks" && <FeedbackComponent />}
+        {activeTab === "reviews" && <Reviews />}
+        {activeTab === "analytics" && <Analytics />}
+        {activeTab === "category" && <CategoryList />}
       </div>
     </div>
-  ); 
+  );
 };
 
 export default AdminDashboard;
