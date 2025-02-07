@@ -17,11 +17,16 @@ export const getLowStockProducts = async () => {
 };
 
 // Helper function to fetch data from Sanity
+const apiUrl =
+  process.env.NEXT_PUBLIC_API_URL
+    ? `${process.env.NEXT_PUBLIC_API_URL}/api/sanity-fetch`
+    : "http://localhost:3000/api/sanity-fetch";
+
 const fetchSanityData = async (query: string) => {
-  const res = await fetch("http://localhost:3000/api/sanity-fetch", {
+  const res = await fetch(apiUrl, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json", // ✅ Added Content-Type header
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ query }),
   });
